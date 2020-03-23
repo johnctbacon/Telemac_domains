@@ -1,0 +1,18 @@
+Telemac2D simulation of the Fal, Truro, Tressilian estuaries and
+Falmouth Bay
+=====================================================================
+John Bacon - 23/03/2020
+
+Model built for the C7244_Sea Food Tomorrow project (H2020)
+The model is of of the river and estuarine system essentially but 
+extends out to a sea boundary driven by TPXO. 
+This model is the initial trial setup to get the tides working.
+Some release of tracer was made as an experiment to examine the 
+dispersal characteristics before developing the Telemac3D model.
+
+Files included:
+1. fal_meshE_2d_src_tpxo_3t.cast  steering file 3 tracers
+2. meshE_geo_tpxo.slf
+3. meshE_geo_tpxo_src_BC.cli
+4. sources - 3 rivers + 1 effluent (STW) at Truro
+
