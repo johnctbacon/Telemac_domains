@@ -1,0 +1,222 @@
+/----------------------------------------------------------------------/
+/    Telemac v7p1 
+/    25 Jan 2016
+/    Irish Sea 2D Steering File
+/----------------------------------------------------------------------/
+
+DEBUGGER=0
+TITLE = 'Particle Trackng Station  base run with wind'
+/----------------------------------------------------------------------/
+/    File Locations
+/----------------------------------------------------------------------/
+
+/PREVIOUS COMPUTATION FILE	= '../results/SM_v2_spinup.slf'
+/PREVIOUS COMPUTATION FILE= './results/SM_v2_summer_2m2_spinf0107.slf'
+RESULTS FILE       = './results/JBSM_2D_tpxo8_rivQm_30dbase.slf'
+RESULT FILE IN LONGITUDE-LATITUDE = NO
+/GEOMETRY FILE                   = '../CCUKSM_MSL_v2m4.slf'
+GEOMETRY FILE                   = './CSX1_MSLmin4.slf'
+/GEOMETRY FILE FORMAT		= SERAFIN
+BOUNDARY CONDITIONS FILE        = './TPXO_rivQm_BC.cli'
+/FORTRAN FILE 			= './user_fortran/flot.f'
+
+/----------------------------------------------------------------------/
+/    Parallel & Previous Computation
+/----------------------------------------------------------------------/
+
+/COMPUTATION CONTINUED    : YES
+/INITIAL TIME SET TO ZERO = YES
+PARALLEL PROCESSORS      : 56
+
+/----------------------------------------------------------------------/
+/    TPXO & Boundary Conditions
+/----------------------------------------------------------------------/
+
+CORIOLIS                        = YES
+CORIOLIS COEFFICIENT            = 0.00011778
+SPHERICAL COORDINATES		= YES
+LATITUDE OF ORIGIN POINT	= 50.0
+LONGITUDE OF ORIGIN POINT 	= 0
+
+/ORIGINAL DATE OF TIME	=2011;06;21
+/ORIGINAL HOUR OF TIME	=23;45;00
+
+ORIGINAL DATE OF TIME	=2011;07;05
+ORIGINAL HOUR OF TIME	=00;00;00
+
+SPATIAL PROJECTION TYPE = 3
+GEOGRAPHIC SYSTEM : 5
+ZONE NUMBER IN GEOGRAPHIC SYSTEM = 30
+TIDAL DATA BASE : 2
+OPTION FOR TIDAL BOUNDARY CONDITIONS :1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1
+GLOBAL NUMBER OF THE POINT TO CALIBRATE HIGH WATER : 20716
+
+BINARY DATABASE 1 FOR TIDE  : '../../TPXO/hf.ES2008.out'
+BINARY DATABASE 2 FOR TIDE  : '../../TPXO/uv.ES2008.out'
+
+INITIAL CONDITIONS : 'TPXO SATELLITE ALTIMETRY'
+MINOR CONSTITUENTS INFERENCE = YES
+
+/INITIAL CONDITIONS : 'CONSTANT ELEVATION' /if used, define INIT ELEV
+/INITIAL ELEVATION = 0   /flat bdry start, average. 
+
+/COEFFICIENT TO CALIBRATE TIDAL RANGE = 0.9
+/COEFFICIENT TO CALIBRATE TIDAL VELOCITIES = 0.95
+
+OPTION FOR LIQUID BOUNDARIES = 2;2;2;2;2;2;2;2;2;2;2;2;2;2;2;2;2
+
+MAXIMUM NUMBER OF BOUNDARIES = 200
+/ River discharges
+/sea;severn;dee;mersey;clyde;tay;firth;tyne;tees;humber;
+/ouse;yare;thames;rother;itchen;exe;tamar
+PRESCRIBED FLOWRATES:0.;162.;73.;56.;122.;184.;70.;72.; 54.;309.;
+                     65.;26.;114.;57.;13.;44.;53.0
+
+/----------------------------------------------------------------------/
+/    Timestep and Output Options
+/----------------------------------------------------------------------/
+
+TIME STEP = 10
+/NUMBER OF TIME STEPS = 60 /30 minutes at 30s
+/NUMBER OF TIME STEPS = 60480 /21 days at 30s
+/NUMBER OF TIME STEPS = 66240 /23 days at 30s
+/NUMBER OF TIME STEPS = 11520 / 4 days 
+NUMBER OF TIME STEPS = 259200 /30 days at 10s
+/NUMBER OF TIME STEPS = 72000 /25 days at 30s
+
+GRAPHIC PRINTOUT PERIOD = 180  / 30m
+
+VARIABLES FOR GRAPHIC PRINTOUTS  : 'U,V,H,B,S'
+/VARIABLES TO BE PRINTED	   : 'U,V,H,B,S'
+/LISTING PRINTOUT PERIOD = 360
+LISTING PRINTOUT PERIOD = 10
+/NUMBER OF FIRST TIME STEP FOR GRAPHIC PRINTOUTS: 172800 /25 days
+/----------------------------------------------------------------------/
+/    Drogues Release Parameters
+/----------------------------------------------------------------------/
+/NUMBER OF DROGUES : 1000
+/PRINTOUT PERIOD FOR DROGUES : 720 / 2hr
+/DROGUES FILE : './results/D_stnD_360.dat'
+/STOCHASTIC DIFFUSION MODEL : 1
+
+/----------------------------------------------------------------------/
+/    Physical Parameters
+/----------------------------------------------------------------------/
+
+MASS-BALANCE : YES
+TIDE GENERATING FORCE = YES
+/ Mittlerer Sand d = 0.375e-3
+LAW OF BOTTOM FRICTION          = 5  /Nikuradse
+FRICTION COEFFICIENT            = 0.006
+/LAW OF BOTTOM FRICTION         = 2  /Chezy
+/FRICTION COEFFICIATIONENT           = 62
+TURBULENCE MODEL                = 3
+/ '1="CONSTANT VISCOSITY"';'2="ELDER"';'3="K-EPSILON MODEL"'
+OPTION FOR THE DIFFUSION OF VELOCITIES : 2
+/NON-DIMENSIONAL DISPERSION COEFFICIENTS = 6.0 ; 0.6
+VELOCITY DIFFUSIVITY            = 1E-6
+/TURBULENCE MODEL FOR SOLID BOUNDARIES = 2
+/LAW OF FRICTION ON LATERAL BOUNDARIES = 5
+/ROUGHNESS COEFFICIENT OF BOUNDARIES = 0.1
+
+/----------------------------------------------------------------------/
+/    Wind
+/----------------------------------------------------------------------/
+
+/AIR PRESSURE                    = NO
+WIND                            = YES
+WIND VELOCITY ALONG X		= 9.40
+WIND VELOCITY ALONG Y		= 3.42
+COEFFICIENT OF WIND INFLUENCE	= 0.565E-3
+/COEFFICIENT OF WIND INFLUENCE	= 5.78E-7
+/THRESHOLD DEPTH FOR WIND	= 20
+
+/----------------------------------------------------------------------/
+/    Numerical Parameters
+/----------------------------------------------------------------------/
+
+/EQUATIONS = 'SAINT-VENANT VE'
+
+ADVECTION                                    = YES
+ADVECTION OF U AND V                         = YES
+ADVECTION OF H                               = YES
+DIFFUSION OF VELOCITY                        = YES
+
+CONTINUITY CORRECTION                        = YES
+
+/OPTION FOR CHARACTERISTICS                      = 1
+/NUMBER OF GAUSS POINTS FOR WEAK CHARACTERISTICS = 6
+/MASS-LUMPING FOR WEAK CHARACTERISTICS           = 1
+
+TREATMENT OF THE LINEAR SYSTEM               = 2
+/ 1: Standard Method   2: Casulli Method
+/TYPE OF ADVECTION                            = 1;1;1;1 / 1;5;1;1
+/SUPG OPTION                                  = 1;0;2;2 / 1;2
+DISCRETIZATIONS IN SPACE                     = 11;11
+/ 1 Element by element, 3 Edge based
+MATRIX STORAGE                               = 3
+
+IMPLICITATION FOR DEPTH                      = 0.6
+IMPLICITATION FOR VELOCITY                   = 0.6
+/IMPLICITATION FOR DIFFUSION OF VELOCITY        = 0
+MASS-LUMPING ON H                            = 1
+MASS-LUMPING ON VELOCITY                     = 1
+MAXIMUM NUMBER OF ITERATIONS FOR SOLVER      = 200
+/SOLVER ACCURACY                              = 1.E-6 / 1.E-6 
+SOLVER                                       = 1
+/1: conjugate gradient,2: conjugate residual
+/3: conjugate gradient on a normal equation,4: minimum error
+/5: conjugate gradient squared (not implemented),6: conjugate gradient squared stabilised (cgstab)
+/7: gmres (see option for solver),8: direct'
+PRECONDITIONING                              = 2
+/ only gmres : DIMENSION OF THE KRYLOV SPACE
+/ TRY VALUES BETWEEN 2 AND 15'
+/SOLVER OPTION                                = 2
+INITIAL GUESS FOR H                          = 1
+INITIAL GUESS FOR U                          = 1
+/ 1=previous'; 0=zero; 2=extrapolation
+FREE SURFACE GRADIENT COMPATIBILITY          = 0.9
+
+TIDAL FLATS                                  = YES
+OPTION FOR THE TREATMENT OF TIDAL FLATS      = 1
+TREATMENT OF NEGATIVE DEPTHS                 = 1
+/ nur mit OPT. T. FLATS = 1, ok
+/0: no treatment 1:smoothing 2:flux control
+H CLIPPING                                   = YES
+MINIMUM VALUE OF DEPTH                       = 0.05
+
+BOTTOM SMOOTHINGS                            = 0
+
+/ END OF STEERING FILE 
+
+/----------------------------------------------------------------------/
+/    For Reference - Outputs
+/----------------------------------------------------------------------/
+/          
+/'U="velocity along x axis  (m/s)"';
+/'V="velocity along y axis  (m/s)"';
+/'C="wave celerity  (m/s)"';
+/'H="water depth  (m)"';
+/'S="free surface elevation  (m)"';
+/'B="bottom elevation  (m)"';
+/'F="Froude number  "';
+/'Q="scalar flowrate of fluid  (m2/s)"';
+/'T="tracer  "';
+/'K="turbulent kinetic energy in k-epsilon model  (J/kg)"';
+/'E="dissipation of turbulent energy  (W/kg)"';
+/'D="turbulent viscosity of k-epsilon model  (m2/s)"';
+/'I="flowrate along x axis  (m2/s)"';
+/'J="flowrate along y axis  (m2/s)"';
+/'M="scalar velocity  (m/s)"';
+/'X="wind along x axis  (m/s)"';
+/'Y="wind along y axis  (m/s)"';
+/'P="air pressure  (Pa)"';
+/'W="friction coefficient"';
+/'A="drift along x  (m)"';
+/'G="drift along y  (m)"';
+/'L="Courant number "';
+/'N="supplementary variable N "';
+/'O="supplementary variable O "';
+/'R="supplementary variable R "';
+/'Z="supplementary variable Z  "'
+

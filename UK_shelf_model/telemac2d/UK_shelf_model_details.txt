@@ -1,0 +1,28 @@
+Telemac2D simulations of the UK Shelf.
+======================================================================
+John Bacon - 23/03/2020
+
+Originally built by David Haverson, modified by Claire Beraud  - a high
+resolution model of the entire UK domain including the Celtic Sea, 
+North Sea, English Channel. A high degree of detail around the whole 
+coastline and particularly for the Western Isles and estuarine 
+environments. Particular care taken in these shallow areas. The model
+runs relatively quickly on 28 cores - say 2-3 hours for a 30 day run.
+Validated originally - much work was carried out under the MERR projects 
+to enable the model to be used to generate 30 day Harmonic Analyses for input
+to the Emergency Response models.
+
+It was also used for 300 day particle tracking runs for release of particle at 
+9 stations  around the UK (as per paper by Elliot (1995)) and reported under 
+C7265H - Defra report MERR2
+
+In this repository
+
+1. Mesh 
+2. Boundary Conditions (including major 17 rivers)
+3. Steering file for a 30 day run with static wind (k-epsilon)
+4. Steering file for particle tracking run (elder)
+5. Fortran files to release particles from station  flot_D_long.f
+6. Derive.f subroutine which changes format of particle tracking 
+   results file
+=======================================================================
