@@ -1,0 +1,206 @@
+/----------------------------------------------------------------------/
+/    Telemac v7p3r1 
+/    20 Jun 2017
+/    Falmouth Dye Tracing 3D Steering File
+/----------------------------------------------------------------------/
+
+DEBUGGER=0
+TITLE = 'Truro, Tressilian, and Fal Rivers 3t+T90'
+/  Rivers added as sources and 4th source for STW at NEWHAM
+/----------------------------------------------------------------------/
+/    File Locations
+/----------------------------------------------------------------------/
+
+
+/STEERING FILE 			= './fal_meshC_2d_tpxo.cast'
+/PREVIOUS COMPUTATION FILE	= './results/EA_r3d_src_tpxo_5.slf'
+2D RESULT FILE  = './results/FC_r2D_24hr.slf'
+3D RESULT FILE  = './results/FC_r3D_24hr.slf'
+RESULT FILE IN LONGITUDE-LATITUDE  = YES
+GEOMETRY FILE                   = './meshE_geo_tpxo.slf'
+BOUNDARY CONDITIONS FILE        = './meshE_geo_tpxo_src_BC.cli'
+SOURCES FILE                    = './sources_4R1E_ambient.txt'
+ASCII ATMOSPHERIC DATA FILE     = './fal_2003_1004.txt'
+FORTRAN FILE = './user_fortran'
+/
+/
+/----------------------------------------------------------------------/
+/    Parallel & Previous Computation
+/----------------------------------------------------------------------/
+/
+PARALLEL PROCESSORS      : 112
+COMPUTATION CONTINUED            = YES
+PREVIOUS COMPUTATION FILE = './results/FA_r3D_5dspin.slf'
+RECORD NUMBER FOR RESTART = 1
+INITIAL TIME SET TO ZERO = YES
+/
+/
+/----------------------------------------------------------------------/
+/    TPXO
+/----------------------------------------------------------------------/
+/ Run for 6 days without graphics
+/run 3 days 
+ORIGINAL HOUR OF TIME = 00;00;00
+ORIGINAL DATE OF TIME = 2017;03;20
+
+SPATIAL PROJECTION TYPE = 3
+SPHERICAL COORDINATES 	= YES
+GEOGRAPHIC SYSTEM : 5
+ZONE NUMBER IN GEOGRAPHIC SYSTEM = 30
+TIDAL DATA BASE : 2
+OPTION FOR TIDAL BOUNDARY CONDITIONS : 1
+OPTION FOR LIQUID BOUNDARIES : 1
+BINARY DATABASE 1 FOR TIDE  : '../../../TPXO/hf.ES2008.out'
+BINARY DATABASE 2 FOR TIDE  : '../../../TPXO/uv.ES2008.out'
+INITIAL CONDITIONS : 'TPXO SATELLITE ALTIMETRY'
+/INITIAL CONDITIONS : 'CONSTANT ELEVATION' /if used, define INIT ELEV
+/INITIAL ELEVATION = 5.65   /start at high water
+
+/COEFFICIENT TO CALIBRATE TIDAL RANGE = 1.0
+/COEFFICIENT TO CALIBRATE SEA LEVEL = 3.032
+/
+/----------------------------------------------------------------------/
+/    Timestep and Output Options
+/----------------------------------------------------------------------/
+
+TIME STEP = 1
+/TIME STEP = 2
+NUMBER OF TIME STEPS = 1728000 /20days
+/NUMBER OF TIME STEPS = 1490400 /end 17:6
+/NUMBER OF TIME STEPS = 120 /test
+/NUMBER OF TIME STEPS = 14400 /1hour
+/
+/
+/
+VARIABLES FOR 2D GRAPHIC PRINTOUTS  : 'U,V,H,B,S,L'
+VARIABLES FOR 3D GRAPHIC PRINTOUTS = Z,U,V,W,TA1,TA2,TA3
+LISTING PRINTOUT PERIOD = 7200
+/LISTING PRINTOUT PERIOD = 10
+GRAPHIC PRINTOUT PERIOD = 1800
+/GRAPHIC PRINTOUT PERIOD = 10
+NUMBER OF FIRST TIME STEP FOR GRAPHIC PRINTOUTS = 1339200 /6 days
+/RESTART MODE    = YES
+/RESTART FILE    ='./results/Restart_Mar2016.slf'
+/
+/---------------------------------------------------------------------/
+/	Vertical coordinates and mesh transformation
+/---------------------------------------------------------------------/
+
+NUMBER OF HORIZONTAL LEVELS = 4
+MESH TRANSFORMATION = 1
+/
+/----------------------------------------------------------------------/
+/    General Options - Boundaries
+/----------------------------------------------------------------------/
+PRESCRIBED ELEVATIONS           = 0
+PRESCRIBED VELOCITIES           = 0
+/VELOCITY PROFILES = 1
+/
+MASS-BALANCE = YES
+
+/----------------------------------------------------------------------/
+/    Physical Parameters
+/----------------------------------------------------------------------/
+
+TIDE GENERATING FORCE  = NO
+LAW OF BOTTOM FRICTION = 5  /Nikuradse
+/ Coefficient used is 0.7mm from Table 7 Soulsby - mud/sand
+FRICTION COEFFICIENT FOR THE BOTTOM  = 0.0007
+/
+/------------------------------------------------------------------/
+/      Tracers                                                     /
+/------------------------------------------------------------------/
+NUMBER OF TRACERS : 3 
+NAMES OF TRACERS : 'TEMPERATURE     DEGREE C        ';
+                   'SALINITY        PSU             ';
+                   'ECOLI           CFU/100ML       '
+INITIAL VALUES OF TRACERS= 9.4;35.;0.
+TRACERS VERTICAL PROFILES : 1;1;1
+/PRESCRIBED TRACERS VALUES = 9.4;35.;0.;8.5;0.;0.;8.5;0.;0.;8.5;0.;0.
+/PRESCRIBED TRACERS VALUES = 9.4;35.0;0.;8.5;1.;0.;8.5;1.;0.;8.5;1.;100.
+/DIFFUSION OF TRACERS = YES
+SCHEME FOR ADVECTION OF TRACERS = 14
+/HYDROSTATIC INCONSISTENCY FILTER : YES
+TREATMENT OF FLUXES AT THE BOUNDARIES : 2;2;2
+/
+/-----------------------------------------------------------------/
+/    Discharge and Sources                                                     
+/-----------------------------------------------------------------/
+/OSB,Rivers Truro, Tressilian, Fal
+ABSCISSAE OF SOURCES = -552030;-556121;-561187;-560257;-561554
+ORDINATES OF SOURCES = 6479206;6485508;6483706;6481346;6481036
+
+ELEVATIONS OF SOURCES = -0.5;-0.5;-0.5;-0.5;-0.5
+
+WATER DISCHARGE OF SOURCES = 2.025;1.6;0.5;0.127;0.3
+
+VALUE OF THE TRACERS AT THE SOURCES = 8.5;1.;0.;8.5;
+                                       1.;0.;8.5;1.;
+                                       0.;8.5;1.;100;8.5;1.;0.
+
+/-------------------------
+/  NUMERICS
+/-------------------------
+/
+HORIZONTAL TURBULENCE MODEL         =   3
+VERTICAL TURBULENCE MODEL           =   3
+MIXING LENGTH MODEL : 3
+/
+DENSITY LAW   = 3
+PRECONDITIONING FOR DIFFUSION OF TRACERS = 2
+NON-HYDROSTATIC VERSION                  = NO
+
+COEFFICIENT FOR HORIZONTAL DIFFUSION OF VELOCITIES = 1.E-6
+COEFFICIENT FOR VERTICAL DIFFUSION OF VELOCITIES   = 1.E-6
+COEFFICIENT FOR HORIZONTAL DIFFUSION OF TRACERS = 1.E-6
+COEFFICIENT FOR VERTICAL DIFFUSION OF TRACERS   = 1.E-6
+ACCURACY FOR DIFFUSION OF TRACERS  =  1.E-10
+MAXIMUM NUMBER OF ITERATIONS FOR PPE    = 250
+MAXIMUM NUMBER OF ITERATIONS FOR DIFFUSION OF TRACERS  = 250
+MAXIMUM NUMBER OF ITERATIONS FOR DIFFUSION OF VELOCITIES  = 250
+MAXIMUM NUMBER OF ITERATIONS FOR VERTICAL VELOCITY        = 250
+MAXIMUM NUMBER OF ITERATIONS FOR DIFFUSION OF K-EPSILON   = 250
+/PRECONDITIONING FOR DIFFUSION OF K-EPSILON     =  34
+/PRECONDITIONING FOR DIFFUSION OF VELOCITIES    =  34
+
+
+SCHEME FOR ADVECTION OF VELOCITIES            = 1
+
+MATRIX STORAGE : 3
+
+
+VELOCITY PROFILES   =   1;5
+
+
+/----------------------------------------------------------------------/
+/		Treatment of tidal flats
+/----------------------------------------------------------------------/
+TIDAL FLATS                                  = YES
+OPTION FOR THE TREATMENT OF TIDAL FLATS      = 1
+TREATMENT OF NEGATIVE DEPTHS                 = 2
+/ nur mit OPT. T. FLATS = 1, ok
+/0: no treatment 1:smoothing 2:flux control
+MASS-LUMPING FOR DEPTH                            = 1
+MASS-LUMPING FOR DIFFUSION                       = 1
+/MASS-LUMPING FOR VELOCITIES                     = 1
+SUPG OPTION : 1;1;1
+
+
+IMPLICITATION FOR DEPTH      = 0.55
+IMPLICITATION FOR VELOCITIES = 0.60
+FREE SURFACE GRADIENT COMPATIBILITY = 0.9     / to smooth surface levels
+
+MASS-BALANCE = YES
+INFORMATION ABOUT MASS-BALANCE FOR EACH LISTING PRINTOUT = YES
+/BYPASS VOID VOLUMES = YES
+/NUMBER OF SUB ITERATIONS FOR NON LINEARITIES = 2
+/TREATMENT OF FLUXES AT THE BOUNDARIES=2;2									   
+/-----------------------------------------------------------------/
+/  WATER QUALITY
+/-----------------------------------------------------------------/
+COUPLING WITH          = 'WAQTEL'
+WAQTEL STEERING FILE   = 'waq_steer.cas'
+WATER QUALITY PROCESS  = 5
+/WIND  = NO   
+/LATITUDE OF ORIGIN POINT = 50.5 
+/LONGITUDE OF ORIGIN POINT = -5.0

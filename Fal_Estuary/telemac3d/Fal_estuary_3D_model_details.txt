@@ -1,0 +1,34 @@
+Fal Estuary - Telemac3D model for E.coli dispersal
+=====================================================================
+John Bacon 24-03-2020
+=====================================================================
+This model is the Telemac3D version of the Fal, Truro and Tressilian 
+Estuary model. Very much based on the methods developed by Luz Garcia
+for the Dartmouth E.coli sudy for Seedcorn C7244A.
+3D Baroclinic mode with salinity and temperature.
+Meteorology from ECMWF ERA5 Interim - single point giving 8 standard 
+atmospheric variables.
+Coupled with WAQTEL 
+There are two sources possible - one with 3 river sources (Fal, Truro,
+and Tressilian) plus 1 pollution outfall (Newnham STW) or a second version
+with 4 sources (added Callenick Creek).
+Decay on the E.coli possible using Implicit or explicit Decay method 
+fortran_luz4.f is the explicit version and fortran_luz5.f the implicit
+Boundary conditions from TPXO 
+Source and discharge data from EA 
+
+In this repository:
+1. fal_2003_1004.txt   met data file
+2. fortran_luz5.f      fortran file for E.coli decay - Implicit version
+3. meshE_geo_tpxo.slf  Mesh - converted to MSL (for TPXO) 
+4. meshE_geo_tpxo_BC.cli Boundary condition for stamdard model (no sources)
+5. meshE_geo_tpxo_src_BC.cli  BC Includes sources
+6. sources_3R1E_ambient.txt   text input for sources and tracers 3 rivers
+7. sources_4R1E_ambient.txt   text input for sources and tracers 4 rivers
+8. t3d_FC_src_tse_24hr.cast   example steering file 
+9. waq_steer.cas              waqtel steering file for coupling
+10. write_mesh.f              only needed with V7p3r1 or earlier
+
+======================================================================
+
+
