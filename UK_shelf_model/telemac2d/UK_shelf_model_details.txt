@@ -16,6 +16,11 @@ It was also used for 300 day particle tracking runs for release of particle at
 9 stations  around the UK (as per paper by Elliot (1995)) and reported under 
 C7265H - Defra report MERR2
 
+Stochastic model for particle tracking (random walk) is invoked by setting in 
+the steering file but must have a turbulence model set. Control of dispersion
+can only be made by using the Elder model where non-dimensional coefficients
+for along and cross flow dispursion can ve varied. 
+
 In this repository
 
 1. Mesh 
@@ -24,5 +29,5 @@ In this repository
 4. Steering file for particle tracking run (elder)
 5. Fortran files to release particles from station  flot_D_long.f
 6. Derive.f subroutine which changes format of particle tracking 
-   results file
+   results file - if needed.
 =======================================================================
